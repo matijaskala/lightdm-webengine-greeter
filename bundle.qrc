@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/_greeter">
+        <file>web-greeter/moment-with-locales.min.js</file>
+        <file>web-greeter/ThemeUtils.js</file>
+        <file>web-greeter/bootstrap.js</file>
+    </qresource>
+</RCC>
