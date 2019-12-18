@@ -11,3 +11,6 @@ executable('lightdm-webengine-greeter',
     'main.cpp', 'mainwindow.cpp', 'greeter.cpp', 'themeutils.cpp', qt5_files,
     install: true,
     dependencies: [qt5_dep, glib_dep, lightdm_gobject_dep, lightdm_qt5_dep])
+install_data('lightdm-webengine-greeter.desktop', install_dir: 'share/xgreeters')
+install_subdir('web-greeter/_vendor', install_dir: 'share/webengine-greeter')
+install_subdir('web-greeter/themes', install_dir: 'share/webengine-greeter')
