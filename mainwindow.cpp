@@ -48,6 +48,7 @@ MainWindow::MainWindow()
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle("WebEngine greeter for LightDM");
     setWindowState(Qt::WindowMaximized);
+    m_view->setContextMenuPolicy(Qt::PreventContextMenu);
     m_view->show();
     setCentralWidget(m_view);
     show();
