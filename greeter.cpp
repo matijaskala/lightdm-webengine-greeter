@@ -234,7 +234,7 @@ QVariant Greeter::users() const
         auto user = static_cast<LightDMUser*>(i->data);
         QVariantHash h;
         h["display_name"] = lightdm_user_get_display_name(user);
-        h["home_direcotry"] = lightdm_user_get_home_directory(user);
+        h["home_directory"] = lightdm_user_get_home_directory(user);
         h["image"] = lightdm_user_get_image(user);
         h["language"] = lightdm_user_get_language(user);
         h["layout"] = lightdm_user_get_layout(user);

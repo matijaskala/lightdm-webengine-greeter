@@ -1,0 +1,169 @@
+html
+{
+  height: 100%;
+}
+
+body
+{
+  background-color: #ffe;
+}
+
+#session-panel-container,
+#power-panel-container
+{
+  position: absolute;
+  margin-right: 40px;
+  right: 0;
+}
+
+#session-panel,
+#power-panel
+{
+  z-index: 999;
+  margin-top: 55px;
+  min-width: 270px;
+  position: absolute;
+  top: 100%;
+  right: -25px;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.4)) drop-shadow(0 3px 4px rgba(0,0,0,0.4));
+  transition: all 200ms ease-in-out;
+  transform-origin: top right;
+  transform: translate(-30px, -20px) scale(0) translate(30px, 20px);
+}
+
+#session-panel:not([open]),
+#power-panel:not([open])
+{
+  visibility: hidden;
+}
+
+#session-panel[open],
+#power-panel[open]
+{
+  transform: translate(-30px, -20px) scale(1) translate(30px, 20px);
+}
+
+#session-panel-anchor
+{
+  z-index: -1;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -6px;
+  right: 45px;
+}
+
+#power-panel-anchor
+{
+  z-index: -1;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -6px;
+  right: 5px;
+}
+
+#session-panel-inner-wrapper,
+#power-panel-inner-wrapper
+{
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.panel-item,
+.panel-item-selectable
+{
+  padding: 8px;
+  -webkit-padding-start: 40px;
+  font-size: 12px;
+  max-width: 300px;
+}
+
+.panel-item:not([selected]),
+.panel-item-selectable:not([selected])
+{
+  cursor: pointer;
+  color: #7A7A7A;
+}
+
+.panel-item:not([selected]):hover
+{
+  color: #FFFFFF;
+  background-color: #4A90E2;
+}
+
+.panel-item-selectable:not([selected]):hover
+{
+  background: url("shared-menu-check-hover.svg") no-repeat #FFFFFF;
+  background-size: 15px 15px;
+  background-position: 8px 8px;
+  color: #171F26;
+}
+
+.panel-item-selectable[selected]
+{
+  background: url("shared-menu-check-active.svg") no-repeat transparent;
+  background-size: 15px 15px;
+  background-position: 8px 8px;
+  color: black;
+  font-weight: 600;
+}
+
+#session-button
+{
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  z-index: 101;
+  font-size: 25px;
+
+  //background-image: url("gear.svg");
+  background-size: 28px;
+  width: 38px;
+  height: 38px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#session-button:hover
+{
+  //background-image: url("gear-hover.svg");
+  background-color: #FFFFFF;
+  border: solid 1px #CCCCCC;
+  border-radius: 2px;
+}
+
+#power-button
+{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 101;
+  font-size: 20px;
+
+  //background-image: url("power_button.png");
+  background-size: 28px;
+  width: 38px;
+  height: 38px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#power-button:hover
+{
+  //background-image: url("power_button_hover.png");
+  background-color: #FFFFFF;
+  border: solid 1px #CCCCCC;
+  border-radius: 2px;
+}

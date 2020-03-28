@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
 #include <QFile>
+#include <QScreen>
 #include <QWebChannel>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
@@ -41,7 +43,7 @@ static void addWebEngineScript(QString path, QString name, QWebEngineView* view)
     view->page()->scripts().insert(script);
 }
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(QString theme)
 : m_view{new QWebEngineView{this}}
 , m_channel{new QWebChannel{m_view->page()}}
 {
@@ -65,5 +67,6 @@ MainWindow::MainWindow()
     addWebEngineScript(":/_greeter/web-greeter/moment-with-locales.min.js", "res1", m_view);
     addWebEngineScript(":/_greeter/web-greeter/ThemeUtils.js", "res2", m_view);
     addWebEngineScript(":/_greeter/web-greeter/bootstrap.js", "res3", m_view);
-    m_view->page()->load(QUrl{"file:///" + m_greeter->themes_directory() + "/" "default" "/index.html"});
+    m_view->page()->load(QUrl{"file:///" + m_greeter->themes_directory() + "/" + theme + "/index.html"});
+    setGeometry(QApplication::primaryScreen()->geometry());
 }

@@ -121,7 +121,7 @@ private:
     QLightDM::Greeter* m_greeter;
     QLightDM::PowerInterface* m_power;
     QString m_shared_data_directory;
-    QString m_themes_directory = "/usr/share/webengine-greeter/themes";
+    QString m_themes_directory = DATADIR "/lightdm-webengine-greeter/themes";
 };
 
 #endif // GREETER_H

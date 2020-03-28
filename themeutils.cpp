@@ -26,7 +26,7 @@ QVariant ThemeUtils::dirlist(QString dirPath, bool onlyImages)
         return QVariantList{};
     bool allowed = false;
     for (auto allowedDir: {
-        "/usr/share/webengine-greeter/themes",
+        DATADIR "/lightdm-webengine-greeter/themes",
         "/usr/share/backgrounds",
         "/usr/share/wallpapers",
         "/tmp"})

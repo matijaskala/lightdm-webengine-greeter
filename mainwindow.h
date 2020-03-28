@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow();
+    MainWindow(QString theme);
 
 private:
     QWebEngineView* m_view;

@@ -145,6 +145,9 @@ class ThemeUtils {
 				moment.locale( time_language );
 			}
 		}
+		if (undefined === time_format) {
+			time_format = 'LT';
+		}
 
 		let local_time = moment().format( time_format );
 

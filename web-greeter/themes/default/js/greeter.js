@@ -354,7 +354,7 @@ class BackgroundManager {
 	 * @param {Object} event jQuery event object.
 	 */
 	background_selected_handler( event ) {
-		let $target = $( event.target ),
+		let $target = $( event.currentTarget ),
 			image = $target.attr( 'data-img' );
 
 		$( '.bg.active' ).removeClass( 'active' );
