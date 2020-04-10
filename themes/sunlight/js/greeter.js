@@ -46,13 +46,17 @@
         if (lightdm.is_authenticated)
         {
           if (selected_session == "default")
-            lightdm.start_session (lightdm.default_session);
+          {
+            if (lightdm.default_session != null && lightdm.default_session.length > 0)
+              lightdm.start_session (lightdm.default_session);
+          }
           else if (selected_session == "previous")
           {
             for (i in lightdm.users)
               if (lightdm.users[i].username == lightdm.authentication_user)
               {
-                lightdm.start_session (lightdm.users[i].session);
+                if (lightdm.users[i].session != null && lightdm.users[i].session.length > 0)
+                  lightdm.start_session (lightdm.users[i].session);
                 break;
               }
           }
@@ -141,7 +145,7 @@
           this.power_panel = document.getElementById("power-panel");
           this.default_session = document.getElementById("session_default");
           this.prev_session = document.getElementById("session_previous");
-          if (lightdm.default_session != null && lightdm.default_session != "")
+          if (lightdm.default_session != null && lightdm.default_session.length > 0)
             this.default_session.innerHTML = "Default (" + lightdm.default_session + ")";
         },
 
