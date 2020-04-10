@@ -107,6 +107,10 @@ window.addEventListener("GreeterReady", () => {
       if (time_remaining > 0)
         countdown();
       panels.init();
+      lightdm.show_prompt.connect( (prompt, type) => show_prompt(prompt, type) );
+      lightdm.show_message.connect( (msg, type) => show_message(msg, type) );
+      lightdm.authentication_complete.connect( () => authentication_complete() );
+      lightdm.autologin_timer_expired.connect( event => cancel_authentication(event) );
 })
       select_session("previous");
     </script>

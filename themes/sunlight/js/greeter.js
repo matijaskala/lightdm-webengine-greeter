@@ -46,18 +46,18 @@
         if (lightdm.is_authenticated)
         {
           if (selected_session == "default")
-            lightdm.login (lightdm.authentication_user, lightdm.default_session);
+            lightdm.start_session (lightdm.default_session);
           else if (selected_session == "previous")
           {
             for (i in lightdm.users)
               if (lightdm.users[i].username == lightdm.authentication_user)
               {
-                lightdm.login (lightdm.authentication_user, lightdm.users[i].session);
+                lightdm.start_session (lightdm.users[i].session);
                 break;
               }
           }
           else
-            lightdm.login (lightdm.authentication_user, selected_session);
+            lightdm.start_session (selected_session);
         }
         else
         {
@@ -141,7 +141,7 @@
           this.power_panel = document.getElementById("power-panel");
           this.default_session = document.getElementById("session_default");
           this.prev_session = document.getElementById("session_previous");
-          if (lightdm.default_session != null && !lightdm.default_session.empty())
+          if (lightdm.default_session != null && lightdm.default_session != "")
             this.default_session.innerHTML = "Default (" + lightdm.default_session + ")";
         },
 
