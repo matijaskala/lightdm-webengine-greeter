@@ -294,6 +294,8 @@ bool Greeter::shutdown()
 
 bool Greeter::start_session(QString session)
 {
+    if (session.isEmpty())
+        return false;
     return m_greeter->startSessionSync(session);
 }
 
