@@ -20,9 +20,9 @@
           <div id="session_previous" class="panel-item-selectable" onclick="select_session('previous')" title="Previous session">Previous</div>
           <span id="session-list"></span>
         </div>
-          <script type="text/javascript">
-window.addEventListener("GreeterReady", () => {
-var el = document.getElementById("session-list");
+        <script type="text/javascript">
+          window.addEventListener("GreeterReady", () => {
+            var el = document.getElementById("session-list");
             for (i in lightdm.sessions)
             {
               session = lightdm.sessions[i];
@@ -34,8 +34,8 @@ var el = document.getElementById("session-list");
 
               el.innerHTML += ('<div id="session_' + key + '" class="panel-item-selectable" onclick="select_session(\'' + key + '\')" title="' + session.comment + '">' + name + '</div>');
             }
-})
-          </script>
+          })
+        </script>
       </div>
     </div>
 
@@ -43,19 +43,19 @@ var el = document.getElementById("session-list");
       <div id="power-panel">
         <div id="power-panel-inner-wrapper">
         </div>
-          <script type="text/javascript">
-window.addEventListener("GreeterReady", () => {
-var el = document.getElementById("power-panel-inner-wrapper");
+        <script type="text/javascript">
+          window.addEventListener("GreeterReady", () => {
+            var el = document.getElementById("power-panel-inner-wrapper");
             if (lightdm.can_suspend)
-              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.suspend();" title="Default session">Stand by</div>');
+              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.suspend();">Stand by</div>');
             if (lightdm.can_hibernate)
-              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.hibernate();" title="Default session">Hibernate</div>');
+              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.hibernate();">Hibernate</div>');
             if (lightdm.can_restart)
-              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.restart();" title="Default session">Reboot</div>');
+              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.restart();">Reboot</div>');
             if (lightdm.can_shutdown)
-              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.shutdown();" title="Previous session">Turn off</div>');
-})
-          </script>
+              el.innerHTML += ('<div class="panel-item" onclick="panels.power_hide(); lightdm.shutdown();">Turn off</div>');
+          })
+        </script>
         <div id="power-panel-anchor"></div>
       </div>
     </div>
@@ -71,57 +71,50 @@ var el = document.getElementById("power-panel-inner-wrapper");
       </div>
     <!--table><tr><td>User</td></tr></table-->
     <script type="text/javascript">
-window.addEventListener("GreeterReady", () => {
-var el = document.getElementById("user_table");
-var code = '';
-      for (i in lightdm.users)
-      {
-        user = lightdm.users[i];
+      window.addEventListener("GreeterReady", () => {
+        var el = document.getElementById("user_table");
+        var code = '';
+        for (i in lightdm.users)
+        {
+          user = lightdm.users[i];
 
-        if (user.image.length > 0 && user.image != user.home_directory + '/.face')
-          image = user.image
-        else
-          image = 'file:///usr/share/icons/Adwaita/48x48/status/avatar-default.png'
+          if (user.image.length > 0 && user.image != user.home_directory + '/.face')
+            image = user.image
+          else
+            image = 'file:///usr/share/icons/Adwaita/48x48/status/avatar-default.png'
 
-        code += '<div style="display: table-row; cursor: pointer; font-size: 1.5vw" id="user_' + user.username + '" onclick="select_user(\'' + user.username + '\')" title="' + user.username + '">';
-        code += '<div class="alert alert-info" style="display: table-cell"><img style="width: 48px; height: 48px" src="' + image + '" /><!--/td>' + '<td-->' + user.display_name + '</div>';
-        if (user.username == lightdm.timed_login_user && lightdm.timed_login_delay > 0)
-          code += '<div style="display: table-cell" id="countdown_label"></div>';
-        code += '</div>';
-      }
-el.innerHTML += code;
-})
+          code += '<div style="display: table-row; cursor: pointer; font-size: 1.5vw" id="user_' + user.username + '" onclick="select_user(\'' + user.username + '\')" title="' + user.username + '">';
+          code += '<div class="alert alert-info" style="display: table-cell"><img style="width: 48px; height: 48px" src="' + image + '" /><!--/td>' + '<td-->' + user.display_name + '</div>';
+          if (user.username == lightdm.timed_login_user && lightdm.timed_login_delay > 0)
+            code += '<div style="display: table-cell" id="countdown_label"></div>';
+          code += '</div>';
+        }
+        el.innerHTML += code;
+      })
     </script>
 
     <div style="display: table-cell; vertical-align: middle">
       <form class="input-group form-group" action="javascript: handle_login()">
         <input style="width: auto; height: auto; font-size: 1.5vw" oninput="javascript: handle_username()" id="username_entry" type="text" placeholder="Username" class="form-control alert-info" required autofocus />
-        <input style="width: auto; height: auto; font-size: 1.5vw" onconfirm="javascript: asd()" id="password_entry" type="password" placeholder="Password" class="form-control alert-warning" />
+        <input style="width: auto; height: auto; font-size: 1.5vw" id="password_entry" type="password" placeholder="Password" class="form-control alert-warning" />
         <input style="width: auto; height: auto; font-size: 1.5vw" type="submit" value="Login" class="form-control btn btn-success" />
       </form>
     </div>
     </div></div>
 
     <script type="text/javascript">
-window.addEventListener("GreeterReady", () => {
-      time_remaining = lightdm.timed_login_delay;
-      if (time_remaining > 0)
-        countdown();
-      panels.init();
-      lightdm.show_prompt.connect( (prompt, type) => show_prompt(prompt, type) );
-      lightdm.show_message.connect( (msg, type) => show_message(msg, type) );
-      lightdm.authentication_complete.connect( () => authentication_complete() );
-      lightdm.autologin_timer_expired.connect( event => cancel_authentication(event) );
-})
+      window.addEventListener("GreeterReady", () => {
+        time_remaining = lightdm.timed_login_delay;
+        if (time_remaining > 0)
+          countdown();
+        panels.init();
+        lightdm.show_prompt.connect( (prompt, type) => show_prompt(prompt, type) );
+        lightdm.show_message.connect( (msg, type) => show_message(msg, type) );
+        lightdm.authentication_complete.connect( () => authentication_complete() );
+        lightdm.autologin_timer_expired.connect( event => cancel_authentication(event) );
+      })
       select_session("previous");
     </script>
 
-    <!--script type="text/javascript">
-      document.write('<audio autoplay id="audio"><_source /></audio>');
-    </script>
-    <script type="text/javascript">
-      node = document.getElementById("audio");
-      node.innerHTML = '<audio autoplay loop id="audio"><source src="Partizanske pesmi - Kdo pa so ti mladi fantje.mp3" type="audio/mpeg" /></audio>';
-    </script-->
   </body>
 </html>
