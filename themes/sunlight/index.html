@@ -64,6 +64,10 @@
     <button id="power-button" type="button" class="fa fa-power-off"></button>
 
     <div id="error_container" style="width: 100%; position: absolute; z-index: 2"></div>
+    <div style="width: 100%; position: absolute; top: 10vh; text-align: center" class="alert-info">
+      <div id="clock_time" style="font-size: 8vh;"></div>
+      <div id="clock_date" style="font-size: 3vh;"></div>
+    </div>
     <div style="display: table; width: 100%; height: 100%; position: absolute">
 
       <div style="display: table-row">
@@ -113,6 +117,13 @@
         lightdm.authentication_complete.connect( () => authentication_complete() );
         lightdm.autologin_timer_expired.connect( event => cancel_authentication(event) );
       })
+      function updateClock() {
+        var d = new Date();
+        document.getElementById("clock_time").innerHTML = d.toLocaleString(undefined, {hour: '2-digit', minute: '2-digit'});
+        document.getElementById("clock_date").innerHTML = d.toLocaleDateString();
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
       select_session("previous");
     </script>
 
