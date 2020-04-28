@@ -19,7 +19,7 @@ sudo ninja install
 
 If the greeter refuses to start, try disabling sandbox:
 
-Create file named _/etc/lightdm/Xgreeter_:
+Create a file named _/etc/lightdm/Xgreeter_:
 ```sh
 #!/bin/sh
 
@@ -29,5 +29,5 @@ exec "$@"
 Then run:
 ```sh
 sudo chmod +x /etc/lightdm/Xgreeter
-sudo sed -i 's:#greeter-wrapper=.*:greeter-wrapper=/etc/lightdm/Xgreeter:'
+sudo sed -i 's:#greeter-wrapper=.*:greeter-wrapper=/etc/lightdm/Xgreeter:' /etc/lightdm/lightdm.conf
 ```
