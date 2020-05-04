@@ -73,7 +73,6 @@
       <div style="display: table-row">
         <div style="display: table-cell; vertical-align: middle"><tble style="display: table" id="user_table"></tble>
       </div>
-    <!--table><tr><td>User</td></tr></table-->
     <script type="text/javascript">
       window.addEventListener("GreeterReady", () => {
         var el = document.getElementById("user_table");
@@ -87,8 +86,8 @@
           else
             image = 'file:///usr/share/icons/Adwaita/48x48/status/avatar-default.png'
 
-          code += '<div style="display: table-row; cursor: pointer; font-size: 1.5vw" id="user_' + user.username + '" onclick="select_user(\'' + user.username + '\')" title="' + user.username + '">';
-          code += '<div class="alert alert-info" style="display: table-cell"><img style="width: 48px; height: 48px" src="' + image + '" /><!--/td>' + '<td-->' + user.display_name + '</div>';
+          code += '<div style="display: table-row; cursor: pointer; font-size: 1vw" id="user_' + user.username + '" onclick="select_user(\'' + user.username + '\')">';
+          code += '<div class="alert alert-info" style="display: table-cell"><table><tr><td rowspan="2"><img style="width: 48px; height: 48px;" src="' + image + '" /><td>' + user.display_name + '</td></tr><tr><td>' + user.username + '</td></tr></table></div>';
           if (user.username == lightdm.timed_login_user && lightdm.timed_login_delay > 0)
             code += '<div style="display: table-cell" id="countdown_label"></div>';
           code += '</div>';
