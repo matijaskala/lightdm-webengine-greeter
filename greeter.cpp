@@ -332,11 +332,11 @@ void Greeter::onReset()
 void Greeter::onShowMessage ( QString text, QLightDM::Greeter::MessageType type )
 {
     emit propertyChanged();
-    QTimer::singleShot(DELAY, [this,text,type] { emit show_message(text, type); });
+    QTimer::singleShot(DELAY, [this,text,type] { emit show_message(text, type == QLightDM::Greeter::MessageTypeError ? "error" : "info"); });
 }
 
 void Greeter::onShowPrompt ( QString text, QLightDM::Greeter::PromptType type )
 {
     emit propertyChanged();
-    QTimer::singleShot(DELAY, [this,text,type] { emit show_prompt(text, type); });
+    QTimer::singleShot(DELAY, [this,text,type] { emit show_prompt(text, type == QLightDM::Greeter::PromptTypeSecret ? "password" : "text"); });
 }

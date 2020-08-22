@@ -113,8 +113,8 @@ Q_SIGNALS:
     void autologin_timer_expired();
     void idle();
     void reset();
-    void show_message(QString text, QLightDM::Greeter::MessageType type);
-    void show_prompt(QString text, QLightDM::Greeter::PromptType type);
+    void show_message(QString text, QString type);
+    void show_prompt(QString text, QString type);
     void propertyChanged();
 
 private:
