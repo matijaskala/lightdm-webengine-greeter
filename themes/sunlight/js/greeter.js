@@ -121,8 +121,8 @@ function select_user(name)
   for (i in lightdm.sessions)
     if (lightdm.sessions[i].key == session_name)
     {
-      this.prev_session.setAttribute("title", "Previous session (" + lightdm.sessions[i].name + ")");
-      this.prev_session.innerHTML = "Previous (" + lightdm.sessions[i].name + ")";
+      panels.prev_session.setAttribute("title", "Previous session (" + lightdm.sessions[i].name + ")");
+      panels.prev_session.innerHTML = "Previous (" + lightdm.sessions[i].name + ")";
       break;
     }
 }
