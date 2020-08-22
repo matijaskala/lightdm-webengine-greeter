@@ -17,8 +17,6 @@ function show_prompt(text, type)
       lightdm.respond(entry.value);
     entry.value = "";
   }
-  if (entry.value.length == 0)
-    entry.focus();
 }
 
 /*
