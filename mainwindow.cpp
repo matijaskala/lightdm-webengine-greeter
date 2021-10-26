@@ -1,6 +1,6 @@
 /*
  * This file is part of WebEngine Greeter
- * Copyright (C) 2019  Matija Skala <mskala@gmx.com>
+ * Copyright (C) 2019-2021 Matija Skala <mskala@gmx.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,9 @@
  */
 
 #include <QApplication>
+#include <QDir>
 #include <QFile>
+#include <QKeyEvent>
 #include <QScreen>
 #include <QWebChannel>
 #include <QWebEngineScript>
@@ -69,4 +71,45 @@ MainWindow::MainWindow(QString theme)
     addWebEngineScript(":/_greeter/web-greeter/bootstrap.js", "res3", m_view);
     m_view->page()->load(QUrl{"file:///" + m_greeter->themes_directory() + "/" + theme + "/index.html"});
     setGeometry(QApplication::primaryScreen()->geometry());
+}
+
+void MainWindow::keyPressEvent ( QKeyEvent* event )
+{
+    bool decrease_brightness = true;
+    switch (event->key()) {
+        case Qt::Key::Key_MonBrightnessUp:
+            decrease_brightness = false;
+            [[fallthrough]];
+        case Qt::Key::Key_MonBrightnessDown: {
+            auto sysdir = "/sys/class/backlight/";
+            auto dir = sysdir + QDir(sysdir).entryList(QDir::Dirs | QDir::NoDotAndDotDot).first();
+            QFile file_max_brightness(dir + "/max_brightness");
+            QFile file_brightness(dir + "/brightness");
+            file_max_brightness.open(QFile::ReadOnly);
+            file_brightness.open(QFile::ReadWrite);
+            qint32 max_brightness;
+            qint32 brightness;
+            {
+                QTextStream stream_max_brightness(&file_max_brightness);
+                QTextStream stream_brightness(&file_brightness);
+                stream_max_brightness >> max_brightness;
+                stream_brightness >> brightness;
+            }
+            if (brightness + max_brightness / 50 > max_brightness &&
+                brightness <= max_brightness && !decrease_brightness)
+                brightness = max_brightness;
+            else if (brightness < max_brightness / 20 + max_brightness / 100 &&
+                brightness <= max_brightness / 100 && decrease_brightness)
+                brightness = max_brightness / 100;
+            else if (decrease_brightness)
+                brightness -= max_brightness / 20;
+            else
+                brightness += max_brightness / 20;
+            {
+                QTextStream stream_brightness(&file_brightness);
+                stream_brightness << brightness;
+            }
+        }
+    }
+    QWidget::keyPressEvent(event);
 }

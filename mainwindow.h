@@ -1,6 +1,6 @@
 /*
  * This file is part of WebEngine Greeter
- * Copyright (C) 2019  Matija Skala <mskala@gmx.com>
+ * Copyright (C) 2019-2021 Matija Skala <mskala@gmx.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QString theme);
+    void keyPressEvent ( QKeyEvent * event ) override;
 
 private:
     QWebEngineView* m_view;

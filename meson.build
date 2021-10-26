@@ -1,4 +1,4 @@
-project('lightdm-webengine-greeter', 'cpp')
+project('lightdm-webengine-greeter', 'cpp', default_options: ['cpp_std=c++17'])
 qt5 = import('qt5')
 qt5_files = qt5.preprocess(
     moc_headers: ['mainwindow.h', 'greeter.h', 'themeutils.h'],
